@@ -34,16 +34,20 @@ export const ProductCard = ({
 
   const handleOpenPopup = () => {
     console.log("Opening customization popup for:", {
-      name,
-      price,
-      category,
-      isOpen: true,
+      productName: name,
+      productPrice: price,
+      productCategory: category,
+      dialogState: true,
+      timestamp: new Date().toISOString()
     });
     setCustomizeOpen(true);
   };
 
   const handleClosePopup = () => {
-    console.log("Closing customization popup for:", name);
+    console.log("Closing customization popup for product:", {
+      productName: name,
+      timestamp: new Date().toISOString()
+    });
     setCustomizeOpen(false);
   };
 
@@ -67,7 +71,8 @@ export const ProductCard = ({
           size="icon"
           className="absolute top-2 right-2 h-[30px] w-[30px] rounded-full bg-[#3BBF5C] hover:bg-[#3BBF5C]/90"
           onClick={handleOpenPopup}
-          aria-label={`Add ${name} to cart`}
+          aria-label={`Customize ${name} options`}
+          data-testid="customize-product-button"
         >
           <Plus className="h-4 w-4 text-white" />
         </Button>
