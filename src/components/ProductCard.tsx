@@ -1,16 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Plus } from "lucide-react";
 import { useState } from "react";
+import { ProductCustomizationDialog } from "./ProductCustomizationDialog";
 
 interface ProductCardProps {
   name: string;
@@ -20,18 +13,6 @@ interface ProductCardProps {
   category: "Beef" | "Chicken" | "Veggie";
 }
 
-interface CustomizationOption {
-  id: string;
-  label: string;
-  price: number;
-}
-
-const customizationOptions: CustomizationOption[] = [
-  { id: "extra-cheese", label: "Extra Cheese", price: 0.99 },
-  { id: "spicy-sauce", label: "Add Spicy Sauce", price: 0.49 },
-  { id: "combo-drink", label: "Combo with Drink", price: 1.99 },
-];
-
 export const ProductCard = ({
   name,
   description,
@@ -39,18 +20,20 @@ export const ProductCard = ({
   promotion,
   category,
 }: ProductCardProps) => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [customizeOpen, setCustomizeOpen] = useState(false);
 
-  const calculateTotal = () => {
-    const optionsTotal = selectedOptions.reduce((total, optionId) => {
-      const option = customizationOptions.find((opt) => opt.id === optionId);
-      return total + (option?.price || 0);
-    }, 0);
-    return (price + optionsTotal).toFixed(2);
+  const handleAddToCart = (quantity: number, removedIngredients: string[]) => {
+    console.log("Adding to cart:", {
+      name,
+      quantity,
+      removedIngredients,
+      totalPrice: price * quantity,
+    });
+    // Here you would implement the actual cart functionality
   };
 
   return (
-    <Card className="relative">
+    <Card className="relative w-[150px]">
       {promotion && (
         <Badge
           variant="destructive"
@@ -59,65 +42,29 @@ export const ProductCard = ({
           {promotion}
         </Badge>
       )}
-      <div className="aspect-square rounded-lg bg-surface mb-3"></div>
-      <div className="p-4">
-        <h3 className="font-medium mb-1">{name}</h3>
-        <p className="text-text-secondary text-sm mb-3">{description}</p>
-        <div className="flex items-center justify-between">
-          <span className="font-semibold">${price}</span>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="default">Customize</Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>{name}</SheetTitle>
-                <SheetDescription>
-                  Customize your empanada to your taste
-                </SheetDescription>
-              </SheetHeader>
-              <div className="py-6">
-                {customizationOptions.map((option) => (
-                  <div
-                    key={option.id}
-                    className="flex items-center justify-between space-x-2 mb-4"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id={option.id}
-                        checked={selectedOptions.includes(option.id)}
-                        onCheckedChange={(checked) => {
-                          setSelectedOptions(
-                            checked
-                              ? [...selectedOptions, option.id]
-                              : selectedOptions.filter((id) => id !== option.id)
-                          );
-                        }}
-                      />
-                      <label
-                        htmlFor={option.id}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {option.label}
-                      </label>
-                    </div>
-                    <span className="text-sm text-text-secondary">
-                      +${option.price.toFixed(2)}
-                    </span>
-                  </div>
-                ))}
-                <div className="mt-6 pt-6 border-t">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="font-medium">Total</span>
-                    <span className="font-semibold">${calculateTotal()}</span>
-                  </div>
-                  <Button className="w-full">Add to Cart</Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+      <div className="aspect-square w-[120px] mx-auto mt-4 rounded-lg bg-surface"></div>
+      <div className="p-3">
+        <h3 className="font-medium text-sm text-center line-clamp-2 mb-1">
+          {name}
+        </h3>
+        <p className="text-base font-semibold text-center mb-2">${price}</p>
+        <Button
+          size="icon"
+          className="absolute top-2 right-2 h-[30px] w-[30px] rounded-full bg-[#3BBF5C] hover:bg-[#3BBF5C]/90"
+          onClick={() => setCustomizeOpen(true)}
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
       </div>
+
+      <ProductCustomizationDialog
+        open={customizeOpen}
+        onOpenChange={setCustomizeOpen}
+        name={name}
+        description={description}
+        price={price}
+        onAddToCart={handleAddToCart}
+      />
     </Card>
   );
-};
+}

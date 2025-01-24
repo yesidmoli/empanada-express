@@ -24,7 +24,7 @@ export default {
         accent: "rgb(218, 1, 0)",
         background: "rgb(255, 255, 255)",
         text: "rgb(17, 17, 17)",
-        "text-secondary": "rgb(82, 82, 82)",
+        "text-secondary": "rgb(107, 107, 107)",
         surface: "rgb(250, 250, 250)",
         "surface-hover": "rgb(245, 245, 245)",
       },
