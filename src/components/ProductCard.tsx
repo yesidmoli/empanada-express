@@ -29,7 +29,7 @@ export const ProductCard = ({
       removedIngredients,
       totalPrice: price * quantity,
     });
-    // Here you would implement the actual cart functionality
+    setCustomizeOpen(false);
   };
 
   return (
@@ -53,7 +53,7 @@ export const ProductCard = ({
           className="absolute top-2 left-2 h-[30px] w-[30px] rounded-full bg-[#3BBF5C] hover:bg-[#3BBF5C]/90"
           onClick={() => setCustomizeOpen(true)}
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4 text-white" />
         </Button>
       </div>
 

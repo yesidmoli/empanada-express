@@ -43,7 +43,6 @@ export function ProductCustomizationDialog({
 
   const handleAddToCart = () => {
     onAddToCart(quantity, removedIngredients);
-    onOpenChange(false);
     setQuantity(1);
     setRemovedIngredients([]);
   };
