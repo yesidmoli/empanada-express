@@ -33,12 +33,18 @@ export const ProductCard = ({
   };
 
   const handleOpenPopup = () => {
-    console.log("Opening customization popup for product:", {
+    console.log("Opening customization popup for:", {
       name,
       price,
       category,
+      isOpen: true,
     });
     setCustomizeOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    console.log("Closing customization popup for:", name);
+    setCustomizeOpen(false);
   };
 
   return (
