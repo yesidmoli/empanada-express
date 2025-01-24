@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import { ProductCard } from "../components/ProductCard";
+import { ProductCarousel } from "../components/ProductCarousel";
 import {
   Select,
   SelectContent,
@@ -19,27 +20,37 @@ const products = [
     name: "Classic Beef",
     description: "Traditional Argentine style",
     price: 3.99,
-    category: "Beef" as const,
-    promotion: "Best Seller" as const,
+    category: "Empanadas",
   },
   {
     name: "Spicy Chicken",
     description: "With bell peppers and onions",
     price: 3.99,
-    category: "Chicken" as const,
-    promotion: "10% OFF" as const,
+    category: "Empanadas",
   },
   {
-    name: "Spinach & Cheese",
-    description: "Fresh vegetables and mozzarella",
-    price: 3.99,
-    category: "Veggie" as const,
+    name: "Arepa con Huevo",
+    description: "Traditional Colombian style",
+    price: 4.99,
+    category: "Arepa Huevo",
   },
   {
-    name: "BBQ Beef",
-    description: "Sweet and smoky flavor",
-    price: 3.99,
-    category: "Beef" as const,
+    name: "Envuelto de Choclo",
+    description: "Sweet corn tamale",
+    price: 3.49,
+    category: "Envueltos de Mazorca",
+  },
+  {
+    name: "Buñuelo Tradicional",
+    description: "Cheese fritter",
+    price: 1.99,
+    category: "Buñuelos",
+  },
+  {
+    name: "Arepa de Queso",
+    description: "Cheese corn cake",
+    price: 2.99,
+    category: "Arepas",
   },
 ];
 
@@ -48,11 +59,16 @@ const Index = () => {
   const [deliveryMode, setDeliveryMode] = useState<"pickup" | "delivery">("delivery");
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const cartItemCount = 2; // This would normally come from a cart context or state
+  const cartItemCount = 2;
 
-  const filteredProducts = products.filter(
-    (product) => selectedCategory === "All" || product.category === selectedCategory
-  );
+  // Group products by category
+  const productsByCategory = products.reduce((acc, product) => {
+    if (!acc[product.category]) {
+      acc[product.category] = [];
+    }
+    acc[product.category].push(product);
+    return acc;
+  }, {} as Record<string, typeof products>);
 
   return (
     <div className="min-h-screen pb-16">
@@ -136,42 +152,11 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-8 px-4">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Featured Products</h2>
-          <Select
-            value={selectedCategory}
-            onValueChange={(value) => setSelectedCategory(value as Category)}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="All">All Categories</SelectItem>
-              <SelectItem value="Beef">Beef</SelectItem>
-              <SelectItem value="Chicken">Chicken</SelectItem>
-              <SelectItem value="Veggie">Veggie</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {filteredProducts.map((product, index) => (
-            <ProductCard key={index} {...product} />
-          ))}
-        </div>
-      </section>
-
-      {/* Promotions */}
-      <section className="py-8 px-4">
-        <h2 className="text-2xl font-bold mb-6">Today's Specials</h2>
-        <div className="card p-6 bg-gradient-to-r from-accent to-accent/90 text-white">
-          <h3 className="text-xl font-bold mb-2">Family Pack</h3>
-          <p className="mb-4">Get 12 empanadas for the price of 10!</p>
-          <button className="btn-primary">
-            View Deal
-          </button>
-        </div>
+      {/* Product Categories */}
+      <section className="py-8">
+        {Object.entries(productsByCategory).map(([category, products]) => (
+          <ProductCarousel key={category} title={category} products={products} />
+        ))}
       </section>
 
       <Navigation />
