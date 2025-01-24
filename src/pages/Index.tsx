@@ -1,10 +1,54 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
+import { ProductCard } from "../components/ProductCard";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+type Category = "All" | "Beef" | "Chicken" | "Veggie";
+
+const products = [
+  {
+    name: "Classic Beef",
+    description: "Traditional Argentine style",
+    price: 3.99,
+    category: "Beef" as const,
+    promotion: "Best Seller" as const,
+  },
+  {
+    name: "Spicy Chicken",
+    description: "With bell peppers and onions",
+    price: 3.99,
+    category: "Chicken" as const,
+    promotion: "10% OFF" as const,
+  },
+  {
+    name: "Spinach & Cheese",
+    description: "Fresh vegetables and mozzarella",
+    price: 3.99,
+    category: "Veggie" as const,
+  },
+  {
+    name: "BBQ Beef",
+    description: "Sweet and smoky flavor",
+    price: 3.99,
+    category: "Beef" as const,
+  },
+];
 
 const Index = () => {
   const navigate = useNavigate();
   const [deliveryMode, setDeliveryMode] = useState<"pickup" | "delivery">("delivery");
+  const [selectedCategory, setSelectedCategory] = useState<Category>("All");
+
+  const filteredProducts = products.filter(
+    (product) => selectedCategory === "All" || product.category === selectedCategory
+  );
 
   return (
     <div className="min-h-screen pb-16">
@@ -59,17 +103,26 @@ const Index = () => {
 
       {/* Featured Products */}
       <section className="py-8 px-4">
-        <h2 className="text-2xl font-bold mb-6">Featured Products</h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold">Featured Products</h2>
+          <Select
+            value={selectedCategory}
+            onValueChange={(value) => setSelectedCategory(value as Category)}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Categories</SelectItem>
+              <SelectItem value="Beef">Beef</SelectItem>
+              <SelectItem value="Chicken">Chicken</SelectItem>
+              <SelectItem value="Veggie">Veggie</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <div className="grid grid-cols-2 gap-4">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="card p-4">
-              <div className="aspect-square rounded-lg bg-surface mb-3"></div>
-              <h3 className="font-medium mb-1">Classic Beef</h3>
-              <p className="text-text-secondary text-sm mb-3">
-                Traditional Argentine style
-              </p>
-              <span className="font-semibold">$3.99</span>
-            </div>
+          {filteredProducts.map((product, index) => (
+            <ProductCard key={index} {...product} />
           ))}
         </div>
       </section>
