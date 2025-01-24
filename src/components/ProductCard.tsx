@@ -32,6 +32,11 @@ export const ProductCard = ({
     setCustomizeOpen(false);
   };
 
+  const handleOpenPopup = () => {
+    console.log("Opening popup for:", name);
+    setCustomizeOpen(true);
+  };
+
   return (
     <Card className="relative w-[150px]">
       {promotion && (
@@ -51,7 +56,7 @@ export const ProductCard = ({
         <Button
           size="icon"
           className="absolute top-2 left-2 h-[30px] w-[30px] rounded-full bg-[#3BBF5C] hover:bg-[#3BBF5C]/90"
-          onClick={() => setCustomizeOpen(true)}
+          onClick={handleOpenPopup}
         >
           <Plus className="h-4 w-4 text-white" />
         </Button>
