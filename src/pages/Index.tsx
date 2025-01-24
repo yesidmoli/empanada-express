@@ -40,9 +40,9 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative h-[300px] bg-gradient-to-b from-primary to-primary/90">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618160702438-9b02ab6515c9')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618160702438-9b02ab6515c9')] bg-cover bg-center opacity-10 blur-sm"></div>
         <div className="relative h-full flex flex-col justify-center items-center text-center px-4">
-          <h1 className="text-4xl font-bold text-secondary mb-4">
+          <h1 className="text-4xl font-bold text-secondary mb-2">
             Delicious Empanadas
           </h1>
           <p className="text-secondary/80 mb-8 max-w-md">

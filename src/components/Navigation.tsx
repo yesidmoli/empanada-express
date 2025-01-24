@@ -10,24 +10,24 @@ const Navigation = () => {
       <div className="max-w-screen-xl mx-auto px-4">
         <div className="flex justify-between items-center py-2">
           <Link to="/" className={`nav-item ${isActive("/") ? "active" : ""}`}>
-            <Home size={24} />
-            <span className="text-xs">Home</span>
+            <Home size={24} className={isActive("/") ? "text-primary" : "text-[#A9A9A9]"} />
+            <span className={`text-xs ${isActive("/") ? "text-secondary" : "text-[#A9A9A9]"}`}>Home</span>
           </Link>
           <Link to="/catalog" className={`nav-item ${isActive("/catalog") ? "active" : ""}`}>
-            <ShoppingBag size={24} />
-            <span className="text-xs">Menu</span>
+            <ShoppingBag size={24} className={isActive("/catalog") ? "text-primary" : "text-[#A9A9A9]"} />
+            <span className={`text-xs ${isActive("/catalog") ? "text-secondary" : "text-[#A9A9A9]"}`}>Menu</span>
           </Link>
           <Link to="/cart" className={`nav-item ${isActive("/cart") ? "active" : ""}`}>
-            <ShoppingCart size={24} />
-            <span className="text-xs">Cart</span>
+            <ShoppingCart size={24} className={isActive("/cart") ? "text-primary" : "text-[#A9A9A9]"} />
+            <span className={`text-xs ${isActive("/cart") ? "text-secondary" : "text-[#A9A9A9]"}`}>Cart</span>
           </Link>
           <Link to="/profile" className={`nav-item ${isActive("/profile") ? "active" : ""}`}>
-            <User size={24} />
-            <span className="text-xs">Profile</span>
+            <User size={24} className={isActive("/profile") ? "text-primary" : "text-[#A9A9A9]"} />
+            <span className={`text-xs ${isActive("/profile") ? "text-secondary" : "text-[#A9A9A9]"}`}>Profile</span>
           </Link>
           <Link to="/support" className={`nav-item ${isActive("/support") ? "active" : ""}`}>
-            <MessageSquare size={24} />
-            <span className="text-xs">Support</span>
+            <MessageSquare size={24} className={isActive("/support") ? "text-primary" : "text-[#A9A9A9]"} />
+            <span className={`text-xs ${isActive("/support") ? "text-secondary" : "text-[#A9A9A9]"}`}>Support</span>
           </Link>
         </div>
       </div>
