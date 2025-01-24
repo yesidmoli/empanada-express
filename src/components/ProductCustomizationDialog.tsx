@@ -38,10 +38,22 @@ export function ProductCustomizationDialog({
   const [removedIngredients, setRemovedIngredients] = useState<string[]>([]);
 
   const handleQuantityChange = (increment: boolean) => {
+    console.log("Quantity change:", {
+      currentQuantity: quantity,
+      increment,
+      timestamp: new Date().toISOString()
+    });
     setQuantity((prev) => Math.max(1, prev + (increment ? 1 : -1)));
   };
 
   const handleAddToCart = () => {
+    console.log("Adding customized product to cart:", {
+      productName: name,
+      quantity,
+      removedIngredients,
+      totalPrice: price * quantity,
+      timestamp: new Date().toISOString()
+    });
     onAddToCart(quantity, removedIngredients);
     setQuantity(1);
     setRemovedIngredients([]);
@@ -60,7 +72,13 @@ export function ProductCustomizationDialog({
           <h3 className="font-medium mb-4">Customize Ingredients</h3>
           <RadioGroup
             value={removedIngredients.join(",")}
-            onValueChange={(value) => setRemovedIngredients(value.split(",").filter(Boolean))}
+            onValueChange={(value) => {
+              console.log("Ingredients selection changed:", {
+                selectedIngredients: value.split(",").filter(Boolean),
+                timestamp: new Date().toISOString()
+              });
+              setRemovedIngredients(value.split(",").filter(Boolean));
+            }}
             className="space-y-3"
           >
             {ingredients.map((ingredient) => (
@@ -80,6 +98,7 @@ export function ProductCustomizationDialog({
                   value={ingredient.id}
                   id={ingredient.id}
                   className="border-2 h-6 w-6"
+                  aria-label={`Remove ${ingredient.name}`}
                 />
               </div>
             ))}
@@ -93,6 +112,8 @@ export function ProductCustomizationDialog({
               size="icon"
               className="h-10 w-10 rounded-full"
               onClick={() => handleQuantityChange(false)}
+              aria-label="Decrease quantity"
+              data-testid="decrease-quantity-button"
             >
               <Minus className="h-4 w-4" />
             </Button>
@@ -104,6 +125,8 @@ export function ProductCustomizationDialog({
               size="icon"
               className="h-10 w-10 rounded-full"
               onClick={() => handleQuantityChange(true)}
+              aria-label="Increase quantity"
+              data-testid="increase-quantity-button"
             >
               <Plus className="h-4 w-4" />
             </Button>
@@ -111,6 +134,7 @@ export function ProductCustomizationDialog({
           <Button
             onClick={handleAddToCart}
             className="bg-[#3BBF5C] hover:bg-[#3BBF5C]/90 text-white px-6 h-[50px] rounded-[10px] min-w-[200px]"
+            data-testid="add-to-cart-button"
           >
             Add ${(price * quantity).toFixed(2)}
           </Button>
