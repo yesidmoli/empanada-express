@@ -9,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { MapPin, ShoppingCart, Search } from "lucide-react";
 
 type Category = "All" | "Beef" | "Chicken" | "Veggie";
 
@@ -45,6 +47,8 @@ const Index = () => {
   const navigate = useNavigate();
   const [deliveryMode, setDeliveryMode] = useState<"pickup" | "delivery">("delivery");
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const cartItemCount = 2; // This would normally come from a cart context or state
 
   const filteredProducts = products.filter(
     (product) => selectedCategory === "All" || product.category === selectedCategory
@@ -54,8 +58,39 @@ const Index = () => {
     <div className="min-h-screen pb-16">
       {/* Header */}
       <header className="bg-white sticky top-0 z-40 border-b border-gray-100">
-        <div className="max-w-screen-xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center gap-4">
+        <div className="max-w-screen-xl mx-auto">
+          {/* Address and Cart Row */}
+          <div className="px-4 py-3 flex justify-between items-center border-b border-gray-100">
+            <button className="flex items-center gap-2 text-text hover:text-secondary transition-colors">
+              <MapPin className="w-5 h-5 text-accent" />
+              <span className="text-sm font-medium">123 Main St, City</span>
+            </button>
+            <button className="relative p-2 hover:bg-surface rounded-full transition-colors">
+              <ShoppingCart className="w-6 h-6 text-secondary stroke-[1.5]" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-accent text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
+          </div>
+
+          {/* Search Bar */}
+          <div className="px-4 py-3 border-b border-gray-100">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" />
+              <Input
+                type="text"
+                placeholder="Search empanadas..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-4 w-full border-primary bg-white shadow-sm"
+              />
+            </div>
+          </div>
+
+          {/* Delivery Mode Toggle */}
+          <div className="px-4 py-3">
             <div className="flex gap-2">
               <button
                 onClick={() => setDeliveryMode("delivery")}
