@@ -20,14 +20,14 @@ const initialCartItems: CartItem[] = [
     name: "Classic Beef Empanada",
     price: 3.99,
     quantity: 2,
-    image: "/public/empanada_carne.jpg"
+    image: "empanada_carne.jpg"
   },
   {
     id: "2",
     name: "Spicy Chicken Empanada",
     price: 3.99,
     quantity: 1,
-    image: "/public/empanada_pollo.jpg"
+    image: "empanada_pollo.jpg"
   },
 ];
 

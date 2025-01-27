@@ -21,42 +21,42 @@ const products = [
     description: "Traditional Argentine style",
     price: 3.99,
     category: "Empanadas",
-    image: "/public/empanada_carne.jpg"
+    image: "empanada_carne.jpg"
   },
   {
     name: "Spicy Chicken",
     description: "With bell peppers and onions",
     price: 3.99,
     category: "Empanadas",
-    image: "/public/empanada_pollo.jpg"
+    image: "empanada_pollo.jpg"
   },
   {
     name: "Arepa con Huevo",
     description: "Traditional Colombian style",
     price: 4.99,
     category: "Arepa Huevo",
-    image: "/public/arepa_huevo.jpg"
+    image: "arepa_huevo.jpg"
   },
   {
     name: "Envuelto de Choclo",
     description: "Sweet corn tamale",
     price: 3.49,
     category: "Envueltos de Mazorca",
-    image: "/public/envuelto_choclo.jpg"
+    image: "envuelto_choclo.jpg"
   },
   {
     name: "Buñuelo Tradicional",
     description: "Cheese fritter",
     price: 1.99,
     category: "Buñuelos",
-    image: "/public/bunuelo.jpg"
+    image: "bunuelo.jpg"
   },
   {
     name: "Arepa de Queso",
     description: "Cheese corn cake",
     price: 2.99,
     category: "Arepas",
-    image: "/public/arepa_queso.jpg"
+    image: "arepa_queso.jpg"
   },
 ];
 
