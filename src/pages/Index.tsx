@@ -21,36 +21,42 @@ const products = [
     description: "Traditional Argentine style",
     price: 3.99,
     category: "Empanadas",
+    image: "/public/empanada_carne.jpg"
   },
   {
     name: "Spicy Chicken",
     description: "With bell peppers and onions",
     price: 3.99,
     category: "Empanadas",
+    image: "/public/empanada_pollo.jpg"
   },
   {
     name: "Arepa con Huevo",
     description: "Traditional Colombian style",
     price: 4.99,
     category: "Arepa Huevo",
+    image: "/public/arepa_huevo.jpg"
   },
   {
     name: "Envuelto de Choclo",
     description: "Sweet corn tamale",
     price: 3.49,
     category: "Envueltos de Mazorca",
+    image: "/public/envuelto_choclo.jpg"
   },
   {
     name: "Buñuelo Tradicional",
     description: "Cheese fritter",
     price: 1.99,
     category: "Buñuelos",
+    image: "/public/bunuelo.jpg"
   },
   {
     name: "Arepa de Queso",
     description: "Cheese corn cake",
     price: 2.99,
     category: "Arepas",
+    image: "/public/arepa_queso.jpg"
   },
 ];
 
@@ -77,10 +83,13 @@ const Index = () => {
         <div className="max-w-screen-xl mx-auto">
           {/* Address and Cart Row */}
           <div className="px-4 py-3 flex justify-between items-center border-b border-gray-100">
-            <button className="flex items-center gap-2 text-text hover:text-secondary transition-colors">
-              <MapPin className="w-5 h-5 text-accent" />
-              <span className="text-sm font-medium">123 Main St, City</span>
-            </button>
+            <div className="flex">
+              <img src="/public/logo.png" alt="logo" width={'60px'} style={{marginRight: "10px"}}/>
+              <button className="flex items-center gap-2 text-text hover:text-secondary transition-colors">
+                <MapPin className="w-5 h-5 text-accent" />
+                <span className="text-sm font-medium">123 Main St, City</span>
+              </button>
+            </div>
             <button className="relative p-2 hover:bg-surface rounded-full transition-colors">
               <ShoppingCart className="w-6 h-6 text-secondary stroke-[1.5]" />
               {cartItemCount > 0 && (
@@ -145,7 +154,7 @@ const Index = () => {
           </p>
           <button
             onClick={() => navigate("/catalog")}
-            className="btn-primary"
+            className="btn-secondary"
           >
             Order Now
           </button>

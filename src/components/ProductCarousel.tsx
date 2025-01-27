@@ -27,7 +27,7 @@ export const ProductCarousel = ({ title, products }: ProductCarouselProps) => {
             <CarouselItem key={index} className="pl-4 basis-[150px]">
               <div className="relative bg-white rounded-lg shadow-sm h-[180px] w-[150px]">
                 <div className="relative">
-                  <div className="h-[120px] w-[120px] mx-auto mt-2 bg-surface rounded-lg" />
+                  <img src={product.image} className="h-[120px] w-[120px] mx-auto mt-2 bg-surface rounded-lg" />
                   <button 
                     className="absolute top-2 right-2 w-[30px] h-[30px] bg-[#3BBF5C] rounded-full flex items-center justify-center hover:brightness-95 active:scale-95 transition-all"
                     onClick={() => console.log('Add to cart:', product.name)}

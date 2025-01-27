@@ -27,7 +27,7 @@ const orderHistory: Order[] = [
     id: "2",
     date: "2024-04-08",
     items: [
-      { name: "Spinach & Cheese", quantity: 3 },
+      { name: "Spicy Chicken", quantity: 3 },
     ],
     total: 11.97,
   },

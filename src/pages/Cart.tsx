@@ -10,6 +10,7 @@ type CartItem = {
   name: string;
   price: number;
   quantity: number;
+  image: string;
 };
 
 // Mock data for demonstration
@@ -19,12 +20,14 @@ const initialCartItems: CartItem[] = [
     name: "Classic Beef Empanada",
     price: 3.99,
     quantity: 2,
+    image: "/public/empanada_carne.jpg"
   },
   {
     id: "2",
     name: "Spicy Chicken Empanada",
     price: 3.99,
     quantity: 1,
+    image: "/public/empanada_pollo.jpg"
   },
 ];
 
@@ -73,7 +76,7 @@ const Cart = () => {
               <CardContent className="p-4">
                 <div className="flex justify-between items-center">
                   <div className="flex-1">
-                    <div className="aspect-square w-20 rounded-lg bg-surface mb-2"></div>
+                    <img src={item.image} className="aspect-square w-20 rounded-lg bg-surface mb-2" />
                     <h3 className="font-medium">{item.name}</h3>
                     <p className="text-sm text-text-secondary">
                       ${item.price.toFixed(2)}
