@@ -84,7 +84,7 @@ const Index = () => {
           {/* Address and Cart Row */}
           <div className="px-4 py-3 flex justify-between items-center border-b border-gray-100">
             <div className="flex">
-              <img src="/public/logo.png" alt="logo" width={'60px'} style={{marginRight: "10px"}}/>
+              <img src="logo.png" alt="logo" width={'60px'} style={{marginRight: "10px"}}/>
               <button className="flex items-center gap-2 text-text hover:text-secondary transition-colors">
                 <MapPin className="w-5 h-5 text-accent" />
                 <span className="text-sm font-medium">123 Main St, City</span>
